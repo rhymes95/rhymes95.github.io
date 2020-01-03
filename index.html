@@ -314,7 +314,7 @@
 <li>BeanFactory    基础类型IoC容器，提供完整的IoC服务支持。如果没有特殊指定，默认采用 <strong>延迟初始化策略（lazy-load）。只有当客户端对象需要访问容器中的某个受管对象的时候，才对 该受管对象进行初始化以及依赖注入操作。</strong>所以，相对来说，容器启动初期速度较快，所需要的资源有限。对于资源有限，并且功能要求不是很严格的场景，BeanFactory是比较合适的 IoC容器选择。 </li>
 <li>ApplicationContext    。ApplicationContext在BeanFactory的基础上构建，是相对比较高级的容器实现，除了拥有BeanFactory的所有支持，ApplicationContext还提供了其他高级特性，比如事件发布、国际化信息支持等，<strong>ApplicationContext所管理的对象，在该类型容器启动之后，默认全部初始化并绑定完成。</strong>所以，相对于BeanFactory来 说，ApplicationContext要求更多的系统资源，同时，因为在启动时就完成所有初始化，容 器启动时间较之BeanFactory也会长一些。在那些系统资源充足，并且要求更多功能的场景中， ApplicationContext类型的容器是比较合适的选择。</li>
 </ul>
-<p><img src="C:%5CUsers%5Cqq389%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200102190604532.png" alt="image-20200102190604532"></p>
+<p><img src="https://github.com/rhymes95/rhymes95.github.io/blob/master/images/beanfactory.png" alt="img"></p>
 <p>BeanFactory 只是一个接口，我们终需要一个该接口的实现来进行实际的Bean的管理，Default- ListableBeanFactory就是这么一个比较通用的BeanFactory实现类。DefaultListableBean- Factory除了间接地实现了BeanFactory接口，还实现了BeanDefinitionRegistry接口，该接口才 是在BeanFactory的实现中担当Bean注册管理的角色。基本上，BeanFactory接口只定义如何访问容 器内管理的Bean的方法，各个BeanFactory的具体实现类负责具体Bean的注册以及管理工作。 BeanDefinitionRegistry接口定义抽象了Bean的注册逻辑。通常情况下，具体的BeanFactory实现 类会实现这个接口来管理Bean的注册。它们之间的关系如图4-3所示。 </p>
 <p>每一个受管的对象，在容器中都会有一个BeanDefinition的实例（instance）与之相对应，该 BeanDefinition的实例负责保存对象的所有必要信息，包括其对应的对象的class类型、是否是抽象 类、构造方法参数以及其他属性等。当客户端向BeanFactory请求相应对象的时候，BeanFactory会 通过这些信息为客户端返回一个完备可用的对象实例。RootBeanDefinition和ChildBean- Definition是BeanDefinition的两个主要实现类。 </p>
 <p>BeanFactory除了拥有作为IoC Service Provider的职责，作为一个轻量级容器，它还有着其他一些 职责，其中就包括对象的生命周期管理。 Spring容器初提供了两种bean的scope类型：singleton和prototype。</p>
